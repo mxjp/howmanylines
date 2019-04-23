@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"declaration": true,
+		"downlevelIteration": true,
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"target": "esnext",
+		"module": "commonjs",
+		"rootDir": "./src",
+		"outDir": "./dist/node"
+	},
+	"include": [
+		"src/**/*.ts"
+	]
+}

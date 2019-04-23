@@ -1,0 +1,7 @@
+/dist/test
+/.nyc_output
+/tsconfig*
+/test
+/src
+/*.tgz
+/preview.png
