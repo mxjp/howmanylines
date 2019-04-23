@@ -3,7 +3,7 @@ import { Stats } from 'fs';
 import { relative } from 'path';
 import * as colors from 'ansi-colors';
 import { filetype } from './filetype';
-import { table, getBorderCharacters } from 'table';
+import { table, getBorderCharacters, TableUserConfig } from 'table';
 import * as bytes from 'pretty-bytes';
 
 export type StatMode = 'default' | 'stream';
@@ -103,7 +103,12 @@ export class Context {
 				colors.cyan(bytes(size))
 			]);
 		}
-		this._showTable(summaryTable);
+		this._showTable(summaryTable, {
+			columns: {
+				1: { alignment: 'right' },
+				2: { alignment: 'right' }
+			}
+		});
 	}
 
 	private _showSummaryAsJson() {
@@ -127,7 +132,12 @@ export class Context {
 				colors.cyan(`${size}`)
 			]);
 		}
-		this._showTable(filesTable);
+		this._showTable(filesTable, {
+			columns: {
+				1: { alignment: 'right' },
+				2: { alignment: 'right' }
+			}
+		});
 	}
 
 	private _showFilesAsJson() {
@@ -142,11 +152,11 @@ export class Context {
 		process.stdout.write(JSON.stringify(data, null, '    ') + '\n');
 	}
 
-	private _showTable(data: string[][]) {
-		process.stdout.write(table(data, {
+	private _showTable(data: string[][], config: TableUserConfig = {}) {
+		process.stdout.write(table(data, Object.assign({
 			border: getBorderCharacters('norc'),
 			drawHorizontalLine: (index, size) => index < 2 || index == size
-		}));
+		}, config)));
 	}
 
 	public show() {
