@@ -1,5 +1,6 @@
 # howmanylines
 Simple performant line counter.
+
 ![Preview](/preview.png)
 
 ## Installation
